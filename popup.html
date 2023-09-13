@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Chargement CIN</title>
+    <script src="popup.js"></script>
+
+    <style>
+        .winp {
+            width: 90px;
+        }
+        .winp2 {
+            width: 140px;
+        }
+    </style>
+</head>
+
+<body style=" width: 600px; height: 500px;">
+    <div class="container mt-3">
+
+        <h2 class="text-center">Chargement CIN</h2>
+
+        <form>
+
+            <div class="input-group mb-3">
+                <input type="file" accept="image/*" class="form-control" id="imageInput">
+                <select class="form-control" id="typeID">
+                    <option selected>Choose...</option>
+                    <option value="oldcni">Ancienne CNI</option>
+                    <option value="newcni">Nouvelle CNI</option>
+                </select>
+                <button type="button" id="uploadButton" class="form-control btn btn-primary">Upload</button>
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <div class="container my-3" id="resultdiv" style="display: none;">
+
+        <!-- <pre id="jsonResponse" style="display: none;"></pre> -->
+
+        <div class="alert alert-primary" role="alertdiv" id="alert" style="display: none;"></div>
+
+        <div class="row ">
+
+            <div class="input-group my-1 col-12">
+                <span class="input-group-text winp">Nom</span>
+                <input type="text" aria-label="Nom" id="nom" class="form-control">
+            </div>
+
+            <div class="input-group my-1 col-12">
+                <span class="input-group-text winp2">Nom de la mère</span>
+                <input type="text" aria-label="nom_mere" id="nom_mere" class="form-control">
+            </div>
+
+            <div class="input-group my-1 col-6">
+                <span class="input-group-text winp">Né lé</span>
+                <input type="text" aria-label="date_naissance" id="date_naissance" class="form-control">
+            </div>
+
+            <div class="input-group my-1 col-6">
+                <span class="input-group-text winp">A</span>
+                <input type="text" aria-label="lieu_naissance" id="lieu_naissance" class="form-control">
+            </div>
+
+            <div class="input-group my-1 col-6">
+                <span class="input-group-text winp">Emission</span>
+                <input type="text" aria-label="date_emission" id="date_emission" class="form-control">
+            </div>
+
+            <div class="input-group my-1 col-6">
+                <span class="input-group-text winp">Expiration</span>
+                <input type="text" aria-label="date_expiration" id="date_expiration" class="form-control">
+            </div>
+
+            <div class="input-group my-1 col-6">
+                <span class="input-group-text winp">Profession</span>
+                <input type="text" aria-label="profession" id="profession" class="form-control">
+            </div>
+
+            <div class="input-group my-1 col-6">
+                <span class="input-group-text winp">Domicile</span>
+                <input type="text" aria-label="adresse" id="adresse" class="form-control">
+            </div>
+
+            <div class="input-group my-1 col-6">
+                <span class="input-group-text winp">Sexe</span>
+                <input type="text" aria-label="sexe" id="sexe" class="form-control">
+            </div>
+
+            <div class="input-group my-1 col-6">
+                <span class="input-group-text winp">CIN N°</span>
+                <input type="text" aria-label="ncni" id="ncni" class="form-control">
+            </div>
+        </div>
+
+        <div class="d-grid gap-2 my-2 mx-auto col-12">
+            <button class="btn btn-primary" id="btnCharger" type="button">Charger</button>
+        </div>
+
+    </div>
+</body>
+
+</html>
