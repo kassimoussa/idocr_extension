@@ -5,7 +5,9 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous">
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script> -->
     <title>Chargement CIN</title>
     <script src="popup.js"></script>
 
@@ -13,33 +15,63 @@
         .winp {
             width: 90px;
         }
+
         .winp2 {
             width: 140px;
         }
+
+        .wslt {
+            width: 40px !important;
+        }
+
+        /* Add your spinner styling here */
+        #spinner {
+            display: none; 
+            justify-content: center; 
+            align-items: center; 
+            background-color: black; 
+            position: fixed; 
+            top: 50%;
+            left: 50%;
+            z-index: 9999;  
+            opacity: .75;
+        }
+
+
     </style>
 </head>
 
 <body style=" width: 600px; height: 500px;">
+
+
     <div class="container mt-3">
 
         <h2 class="text-center">Chargement CIN</h2>
 
-        <form>
-
-            <div class="input-group mb-3">
-                <input type="file" accept="image/*" class="form-control" id="imageInput">
-                <select class="form-control" id="typeID">
-                    <option selected>Choose...</option>
-                    <option value="oldcni">Ancienne CNI</option>
-                    <option value="newcni">Nouvelle CNI</option>
-                </select>
-                <button type="button" id="uploadButton" class="form-control btn btn-primary">Upload</button>
-            </div>
-
-        </form>
+        <div class="input-group input-group-sm mb-3">
+            <input type="file" accept="image/*" class="form-control form-control-sm " id="imageInput">
+            <select class="form-control  wslt " id="typeID">
+                <option selected>Choose...</option>
+                <option value="oldcni">Ancienne CNI</option>
+                <option value="newcni">Nouvelle CNI</option>
+            </select>
+            <button type="button" id="uploadButton" class="btn btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em"
+                    viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                    <path
+                        d="M296 384h-80c-13.3 0-24-10.7-24-24V192h-87.7c-17.8 0-26.7-21.5-14.1-34.1L242.3 5.7c7.5-7.5 19.8-7.5 27.3 0l152.2 152.2c12.6 12.6 3.7 34.1-14.1 34.1H320v168c0 13.3-10.7 24-24 24zm216-8v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h136v8c0 30.9 25.1 56 56 56h80c30.9 0 56-25.1 56-56v-8h136c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z" />
+                </svg>
+            </button>
+        </div>
 
     </div>
 
+    <div class="d-flex justify-content-center align-items-center ">
+        <div id="spinner" class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    
 
     <div class="container my-3" id="resultdiv" style="display: none;">
 
@@ -47,61 +79,74 @@
 
         <div class="alert alert-primary" role="alertdiv" id="alert" style="display: none;"></div>
 
-        <div class="row ">
 
-            <div class="input-group my-1 col-12">
-                <span class="input-group-text winp">Nom</span>
-                <input type="text" aria-label="Nom" id="nom" class="form-control">
+        <div class="container text-center">
+
+            <div class="row ">
+
+                <div class="input-group my-1 col-12">
+                    <span class="input-group-text winp">Nom</span>
+                    <input type="text" aria-label="Nom" id="nom" class="form-control">
+                </div>
+
+                <div class="input-group my-1 col-12">
+                    <span class="input-group-text winp">Sa mère</span>
+                    <input type="text" aria-label="nom_mere" id="nom_mere" class="form-control">
+                </div>
+
             </div>
 
-            <div class="input-group my-1 col-12">
-                <span class="input-group-text winp2">Nom de la mère</span>
-                <input type="text" aria-label="nom_mere" id="nom_mere" class="form-control">
+            <div class="row ">
+                <div class="input-group my-1 col">
+                    <span class="input-group-text winp">Né lé</span>
+                    <input type="text" aria-label="date_naissance" id="date_naissance" class="form-control">
+                </div>
+
+                <div class="input-group my-1 col">
+                    <span class="input-group-text winp">A</span>
+                    <input type="text" aria-label="lieu_naissance" id="lieu_naissance" class="form-control">
+                </div>
             </div>
 
-            <div class="input-group my-1 col-6">
-                <span class="input-group-text winp">Né lé</span>
-                <input type="text" aria-label="date_naissance" id="date_naissance" class="form-control">
+            <div class="row ">
+                <div class="input-group my-1 col">
+                    <span class="input-group-text winp">Emission</span>
+                    <input type="text" aria-label="date_emission" id="date_emission" class="form-control">
+                </div>
+
+                <div class="input-group my-1 col">
+                    <span class="input-group-text winp">Expiration</span>
+                    <input type="text" aria-label="date_expiration" id="date_expiration" class="form-control">
+                </div>
             </div>
 
-            <div class="input-group my-1 col-6">
-                <span class="input-group-text winp">A</span>
-                <input type="text" aria-label="lieu_naissance" id="lieu_naissance" class="form-control">
+            <div class="row ">
+
+                <div class="input-group my-1 col">
+                    <span class="input-group-text winp">Profession</span>
+                    <input type="text" aria-label="profession" id="profession" class="form-control">
+                </div>
+
+                <div class="input-group my-1 col">
+                    <span class="input-group-text winp">Domicile</span>
+                    <input type="text" aria-label="adresse" id="adresse" class="form-control">
+                </div>
             </div>
 
-            <div class="input-group my-1 col-6">
-                <span class="input-group-text winp">Emission</span>
-                <input type="text" aria-label="date_emission" id="date_emission" class="form-control">
+            <div class="row ">
+                <div class="input-group my-1 col">
+                    <span class="input-group-text winp">Sexe</span>
+                    <input type="text" aria-label="sexe" id="sexe" class="form-control">
+                </div>
+
+                <div class="input-group my-1 col">
+                    <span class="input-group-text winp">CIN N°</span>
+                    <input type="text" aria-label="ncni" id="ncni" class="form-control">
+                </div>
             </div>
 
-            <div class="input-group my-1 col-6">
-                <span class="input-group-text winp">Expiration</span>
-                <input type="text" aria-label="date_expiration" id="date_expiration" class="form-control">
-            </div>
+            <button class="btn btn-sm btn-primary my-2 w-50 " id="btnCharger" type="button">Charger</button>
 
-            <div class="input-group my-1 col-6">
-                <span class="input-group-text winp">Profession</span>
-                <input type="text" aria-label="profession" id="profession" class="form-control">
-            </div>
-
-            <div class="input-group my-1 col-6">
-                <span class="input-group-text winp">Domicile</span>
-                <input type="text" aria-label="adresse" id="adresse" class="form-control">
-            </div>
-
-            <div class="input-group my-1 col-6">
-                <span class="input-group-text winp">Sexe</span>
-                <input type="text" aria-label="sexe" id="sexe" class="form-control">
-            </div>
-
-            <div class="input-group my-1 col-6">
-                <span class="input-group-text winp">CIN N°</span>
-                <input type="text" aria-label="ncni" id="ncni" class="form-control">
-            </div>
-        </div>
-
-        <div class="d-grid gap-2 my-2 mx-auto col-12">
-            <button class="btn btn-primary" id="btnCharger" type="button">Charger</button>
         </div>
 
     </div>

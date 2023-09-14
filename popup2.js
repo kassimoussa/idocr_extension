@@ -2,9 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const loadButton = document.getElementById("btnCharger");
   const typeSelect = document.getElementById("typeID");
 
-  // Get a reference to the spinner element
-  const spinner = document.getElementById("spinner");
-
   let jsonData = {}; // Pour stocker les données JSON
 
   document
@@ -23,14 +20,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const selectedOption = typeSelect.value;
 
       // Construct the API URL based on the selected option
-      const apiUrl = `http://172.16.1.54:8000/api/${selectedOption}`;
+      const apiUrl = `http://192.168.100.183:8000/api/${selectedOption}`;
 
       if (file) {
         const formData = new FormData();
         formData.append("image", file);
-
-        // Show the spinner
-        spinner.style.display = "block";
 
         try {
           const response = await fetch(apiUrl, {
@@ -40,9 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
           if (response.ok) {
             jsonData = await response.json();
-
-            // Hide the spinner when the response is received
-            spinner.style.display = "none";
 
             //console.log(jsonData);
             /*  const uploadedImage = document.getElementById("uploadedImage");
@@ -79,19 +70,19 @@ document.addEventListener("DOMContentLoaded", () => {
             if (jsonData.sexe) {
               ipsexe.value = jsonData.sexe;
             } else {
-              ipsexe.value = "Si vide remplir";
+              ipsexe.value = "";
             }
 
             if (jsonData.date_emission) {
               ipdate_emission.value = jsonData.date_emission;
             } else {
-              ipdate_emission.value = "Si vide remplir";
+              ipdate_emission.value = "";
             }
 
             if (jsonData.date_expiration) {
               ipdate_expiration.value = jsonData.date_expiration;
             } else {
-              ipdate_expiration.value = "Si vide remplir";
+              ipdate_expiration.value = "";
             }
 
             ipadresse.value = jsonData.adresse;
@@ -109,9 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         } catch (error) {
           console.log("Error ", error);
-
-          // Hide the spinner in case of an error
-          spinner.style.display = "none";
         }
       }
     });
