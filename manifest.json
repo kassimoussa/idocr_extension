@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "CIN ext",
+    "name": "CNI OCR ",
     "version": "1.0",
-    "description": "Uploads images to an API", 
+    "description": "Uploads images to an OCR API to retrieve data from an ID Card", 
     "action": {
       "default_popup": "popup.html",
       "default_icon": {
