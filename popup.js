@@ -15,104 +15,112 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Check if a file is selected
       if (imageInput.files.length === 0) {
-        alert("Please select an image file.");
+        alert("Veuillez charger l'image d'une CNI.");
         return;
       }
 
       // Get the selected option's value
       const selectedOption = typeSelect.value;
 
-      // Construct the API URL based on the selected option
-      const apiUrl = `http://172.16.1.54:8000/api/${selectedOption}`;
+      // Check if a option selected
+      if (selectedOption === "oldcni" || selectedOption === "newcni") {
+        // Construct the API URL based on the selected option
+        const apiUrl = `http://172.16.1.54:8000/api/${selectedOption}`;
 
-      if (file) {
-        const formData = new FormData();
-        formData.append("image", file);
+        if (file) {
+          const formData = new FormData();
+          formData.append("image", file);
 
-        // Show the spinner
-        spinner.style.display = "block";
+          // Show the spinner
+          spinner.style.display = "block";
 
-        try {
-          const response = await fetch(apiUrl, {
-            method: "POST",
-            body: formData,
-          });
+          try {
+            const response = await fetch(apiUrl, {
+              method: "POST",
+              body: formData,
+            });
 
-          if (response.ok) {
-            jsonData = await response.json();
+            if (response.ok) {
+              jsonData = await response.json();
 
-            // Hide the spinner when the response is received
-            spinner.style.display = "none";
+              // Hide the spinner when the response is received
+              spinner.style.display = "none";
 
-            //console.log(jsonData);
-            /*  const uploadedImage = document.getElementById("uploadedImage");
+              //console.log(jsonData);
+              /*  const uploadedImage = document.getElementById("uploadedImage");
             uploadedImage.src = responseData.image_url;
             uploadedImage.style.display = "block"; */
 
-            /* const jsonResponse = document.getElementById("jsonResponse");
+              /* const jsonResponse = document.getElementById("jsonResponse");
             jsonResponse.textContent = JSON.stringify(responseData, null, 2);
             jsonResponse.style.display = "block"; */
 
-            const resultdiv = document.getElementById("resultdiv");
+              const resultdiv = document.getElementById("resultdiv");
 
-            const alertdiv = document.getElementById("alertdiv");
+              const alertdiv = document.getElementById("alertdiv");
 
-            const ipnom = document.getElementById("nom");
-            const ipdate_naissance = document.getElementById("date_naissance");
-            const iplieu_naissance = document.getElementById("lieu_naissance");
-            const ipnom_mere = document.getElementById("nom_mere");
-            const ipprofession = document.getElementById("profession");
-            const ipsexe = document.getElementById("sexe");
-            const ipdate_emission = document.getElementById("date_emission");
-            const ipdate_expiration =
-              document.getElementById("date_expiration");
-            const ipadresse = document.getElementById("adresse");
-            const ipnncni = document.getElementById("ncni");
+              const ipnom = document.getElementById("nom");
+              const ipdate_naissance =
+                document.getElementById("date_naissance");
+              const iplieu_naissance =
+                document.getElementById("lieu_naissance");
+              const ipnom_mere = document.getElementById("nom_mere");
+              const ipprofession = document.getElementById("profession");
+              const ipsexe = document.getElementById("sexe");
+              const ipdate_emission = document.getElementById("date_emission");
+              const ipdate_expiration =
+                document.getElementById("date_expiration");
+              const ipadresse = document.getElementById("adresse");
+              const ipnncni = document.getElementById("ncni");
 
-            ipnom.value = jsonData.nom;
-            ipdate_naissance.value = jsonData.date_naissance;
-            iplieu_naissance.value = jsonData.lieu_naissance;
+              ipnom.value = jsonData.nom;
+              ipdate_naissance.value = jsonData.date_naissance;
+              iplieu_naissance.value = jsonData.lieu_naissance;
 
-            ipnom_mere.value = jsonData.nom_mere;
-            ipprofession.value = jsonData.profession;
+              ipnom_mere.value = jsonData.nom_mere;
+              ipprofession.value = jsonData.profession;
 
-            if (jsonData.sexe) {
-              ipsexe.value = jsonData.sexe;
+              if (jsonData.sexe) {
+                ipsexe.value = jsonData.sexe;
+              } else {
+                ipsexe.value = "Si vide remplir";
+              }
+
+              if (jsonData.date_emission) {
+                ipdate_emission.value = jsonData.date_emission;
+              } else {
+                ipdate_emission.value = "Si vide remplir";
+              }
+
+              if (jsonData.date_expiration) {
+                ipdate_expiration.value = jsonData.date_expiration;
+              } else {
+                ipdate_expiration.value = "Si vide remplir";
+              }
+
+              ipadresse.value = jsonData.adresse;
+              ipnncni.value = jsonData.ncni;
+
+              resultdiv.style.display = "block";
+              alertdiv.style.display = "none";
+
+              console.log("Image uploaded successfully");
             } else {
-              ipsexe.value = "Si vide remplir";
+              resultdiv.style.display = "block";
+              alertdiv.innerHTML = "Image upload failed";
+              alertdiv.style.display = "block";
+              console.log("Image upload failed");
             }
+          } catch (error) {
+            console.log("Error ", error);
 
-            if (jsonData.date_emission) {
-              ipdate_emission.value = jsonData.date_emission;
-            } else {
-              ipdate_emission.value = "Si vide remplir";
-            }
-
-            if (jsonData.date_expiration) {
-              ipdate_expiration.value = jsonData.date_expiration;
-            } else {
-              ipdate_expiration.value = "Si vide remplir";
-            }
-
-            ipadresse.value = jsonData.adresse;
-            ipnncni.value = jsonData.ncni;
-
-            resultdiv.style.display = "block";
-            alertdiv.style.display = "none";
-
-            console.log("Image uploaded successfully");
-          } else {
-            resultdiv.style.display = "block";
-            alertdiv.innerHTML = "Image upload failed";
-            alertdiv.style.display = "block";
-            console.log("Image upload failed");
+            // Hide the spinner in case of an error
+            spinner.style.display = "none";
           }
-        } catch (error) {
-          console.log("Error ", error);
-
-          // Hide the spinner in case of an error
-          spinner.style.display = "none";
         }
+      } else {
+        alert("Veuillez choisir une option.");
+        return;
       }
     });
 
