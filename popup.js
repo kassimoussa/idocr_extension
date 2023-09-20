@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Check if a option selected
       if (selectedOption === "oldcni" || selectedOption === "newcni") {
         // Construct the API URL based on the selected option
-        const apiUrl = `http://172.16.1.54:8000/api/${selectedOption}`;
+        const apiUrl = `http://192.168.100.183:8000/api/${selectedOption}`;
 
         if (file) {
           const formData = new FormData();
@@ -83,19 +83,19 @@ document.addEventListener("DOMContentLoaded", () => {
               if (jsonData.sexe) {
                 ipsexe.value = jsonData.sexe;
               } else {
-                ipsexe.value = "Si vide remplir";
+                ipsexe.value = "";
               }
 
               if (jsonData.date_emission) {
                 ipdate_emission.value = jsonData.date_emission;
               } else {
-                ipdate_emission.value = "Si vide remplir";
+                ipdate_emission.value = "";
               }
 
               if (jsonData.date_expiration) {
                 ipdate_expiration.value = jsonData.date_expiration;
               } else {
-                ipdate_expiration.value = "Si vide remplir";
+                ipdate_expiration.value = "";
               }
 
               ipadresse.value = jsonData.adresse;
